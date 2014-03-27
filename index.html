@@ -12,6 +12,10 @@
 <body>
 <!-- Start of first page -->
 <div data-role="page" id="foo">
+	
+	<label for="text-2">Add a new quote:</label>
+	 <input type="submit" value="Submit Button" id="button2" />
+	
 
     <div data-role="header">
         <h1>Foo</h1>
@@ -54,6 +58,16 @@ $(document).bind('pageinit', function() {
   });
 
 });
+</script>
+<script type="text/javascript">
+$( "#button2" ).bind( "click", function(event, ui) {
+   alert("Posting a new quote");
+   var jsonUrl = "http://localhost:3001/quote";
+   var newQuote = { "author" : "foo", "text" : "some text" };
+   $.post(jsonUrl,newQuote, function(data) {
+     alert("Added " + data.author + " " + data.text);
+   }, 'json');
+ });
 </script>
 </body>
 </html>
